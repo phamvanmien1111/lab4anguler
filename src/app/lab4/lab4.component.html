@@ -1,0 +1,88 @@
+<div class="product-grid mt-5">
+<div *ngFor="let product of products" class="product-card">
+    <div [id]="'carouselExample' + product.id" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-inner">
+            <div *ngFor="let image of productImages()[product.id]; let i = index" class="carousel-item"
+                [class.active]="i === 0">
+                <img [src]="image.url" class="d-block mx-auto w-100" [alt]="image.alt">
+            </div>
+        </div>
+    
+        <!-- Nút Previous -->
+        <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExample' + product.id"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+    
+        <!-- Nút Next -->
+        <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExample' + product.id"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <div class="mt-3">
+        <span class="price">{{ product.price | currency:'USD' }}</span>
+
+        <span *ngIf="product.olds else noOldPrice" class="old-price">
+            {{ product.olds | currency:'USD' }}
+        </span>
+        <ng-template #noOldPrice>
+            <span class="old-price text-muted">Không có giá cũ</span>
+        </ng-template>
+
+        <span class="best-seller">Giảm Giá</span>
+        <span class="stars">⭐ 4.5</span>
+        <span class="reviews">(100+ đánh giá)</span>
+    </div>
+
+    <h5 class="mt-2">{{ product.name }}</h5>
+    <p>{{ product.details }}</p>
+
+    <h6 class="mt-3">Kích thước</h6>
+    <h6 class="mt-3">Kích thước</h6>
+    <div class="size-options">
+        <span *ngFor="let size of product.sizes" class="size-badge"
+            [ngClass]="{ 'selected': selectedSizes()[product.id] === size }" (click)="selectSize(product.id, size)">
+            {{ size }}
+        </span>
+    </div>
+
+    <h6>Màu sắc</h6>
+    <div class="color-options">
+        <span *ngFor="let variation of product.variations" [style.background]="variation.color" class="color-circle"
+            [class.selected]="selectedColors()[product.id] === variation.color"
+            (click)="changeColor(product.id, variation.color)">
+        </span>
+    </div>
+
+    <h6 class="mt-3">Số Lượng <span class="badge bg-success">Trong Kho</span></h6>
+    <div class="d-flex align-items-center">
+        <input type="text" [value]="getQuantity(product.id)" class="form-control text-center w-25 mx-2" readonly>
+        <button class="btn btn-outline-secondary" (click)="giam(product.id)">-</button>
+        <button class="btn btn-outline-secondary" (click)="tang(product.id)">+</button>
+    </div>
+    
+    <div class="mt-4">
+        <div class="d-flex justify-content-between border rounded p-2">
+            <button class="btn position-relative p-0">
+                <i class="bi bi-heart fs-4"></i>
+                <span
+                    class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+            </button>
+            <button class="btn position-relative p-0">
+                <i class="bi bi-bag fs-4"></i>
+                <span
+                    class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+            </button>
+            <button class="btn btn-primary w-75">Buy Now</button>
+        </div>
+    </div>
+
+    <div class="mt-3 text-center">
+        <a [routerLink]="['/detail', product.id]" class="btn btn-outline-primary w-100">
+            Xem Chi Tiết
+        </a>
+    </div>
+</div>
+</div>

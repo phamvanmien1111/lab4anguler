@@ -1,0 +1,18 @@
+.carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
+.carousel-item img {
+  max-height: 500px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  width: auto;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-size: 1.5rem;
+}
