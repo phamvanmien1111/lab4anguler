@@ -57,7 +57,7 @@ export class ProductService {
           ]
         },
         {
-          color: "black",
+          color: "dark",
           images: [
             { url: "https://www.carandbike.com/_next/image?url=https%3A%2F%2Fimages.carandbike.com%2Fbike-images%2Fcolors%2Fkawasaki%2Fninja-zx-4r%2Fkawasaki-ninja-zx-4r-metallic-spark-black.jpg%3Fv%3D1697534375&w=750&q=75", alt: "Silver Bike" },
             { url: "https://www.carandbike.com/_next/image?url=https%3A%2F%2Fimages.carandbike.com%2Fbike-images%2Fgallery%2Fkawasaki%2Fninja-zx-4r%2Fexterior%2Fkawasaki_ninja_zx-4r_class-leading-engine-performance.jpg%3Fv%3D2023-10-17&w=828&q=75", alt: "Silver Bike" }

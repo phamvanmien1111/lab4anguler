@@ -1,0 +1,98 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Thêm Sản Phẩm Mới</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                <!-- Tên sản phẩm -->
+                <div class="mb-3">
+                    <label class="form-label">Tên sản phẩm *</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Nhập tên sản phẩm">
+                    <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"
+                        class="text-danger">
+                        <div *ngIf="productForm.get('name')?.errors?.['required']">Vui lòng nhập tên sản phẩm</div>
+                        <div *ngIf="productForm.get('name')?.errors?.['minlength']">
+                            Tên sản phẩm phải có ít nhất 6 ký tự
+                        </div>
+                        <div *ngIf="productForm.get('name')?.errors?.['maxlength']">
+                            Tên sản phẩm không được vượt quá 50 ký tự
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mô tả sản phẩm -->
+                <div class="mb-3">
+                    <label class="form-label">Mô tả *</label>
+                    <textarea class="form-control" formControlName="description" rows="3"
+                        placeholder="Nhập mô tả sản phẩm"></textarea>
+                    <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+                        class="text-danger">
+                        <div *ngIf="productForm.get('description')?.errors?.['required']">Vui lòng nhập mô tả</div>
+                        <div *ngIf="productForm.get('description')?.errors?.['minlength']">
+                            Mô tả phải có ít nhất 6 ký tự
+                        </div>
+                        <div *ngIf="productForm.get('description')?.errors?.['maxlength']">
+                            Mô tả không được vượt quá 250 ký tự
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Giá sản phẩm -->
+                <div class="mb-3">
+                    <label class="form-label">Giá *</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" formControlName="price"
+                            placeholder="Nhập giá sản phẩm">
+                    </div>
+                    <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+                        class="text-danger">
+                        <div *ngIf="productForm.get('price')?.errors?.['required']">Vui lòng nhập giá</div>
+                        <div *ngIf="productForm.get('price')?.errors?.['min']">
+                            Giá tối thiểu là 1
+                        </div>
+                        <div *ngIf="productForm.get('price')?.errors?.['max']">
+                            Giá tối đa là 100
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Màu sắc -->
+                <div class="mb-3">
+                    <label class="form-label">Màu sắc có sẵn *</label>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="form-check" *ngFor="let color of availableColors">
+                            <input class="form-check-input" type="checkbox" [id]="'color-'+color"
+                                (change)="onColorChange(color, $event)">
+                            <label class="form-check-label" [for]="'color-'+color">{{color}}</label>
+                        </div>
+                    </div>
+                    <div *ngIf="productForm.get('colors')?.invalid && productForm.get('colors')?.touched"
+                        class="text-danger">
+                        Vui lòng chọn ít nhất 1 màu
+                    </div>
+                </div>
+
+                <!-- Hình ảnh -->
+                <div class="mb-4">
+                    <label class="form-label">Hình ảnh sản phẩm *</label>
+                    <input type="file" class="form-control" multiple accept="image/*"
+                        (change)="onPhotoSelected($event)">
+                    <small class="text-muted">Có thể chọn nhiều ảnh cùng lúc</small>
+                    <div *ngIf="productForm.get('photos')?.invalid && productForm.get('photos')?.touched"
+                        class="text-danger">
+                        Vui lòng chọn ít nhất 1 hình ảnh
+                    </div>
+                </div>
+
+                <!-- Nút gửi -->
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success" [disabled]="!productForm.valid">
+                        <i class="fas fa-save me-2"></i>Thêm Sản Phẩm
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

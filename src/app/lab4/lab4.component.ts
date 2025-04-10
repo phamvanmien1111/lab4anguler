@@ -75,7 +75,8 @@ export class Lab4Component implements OnInit, AfterViewInit {
     if (variation) {
       this.productImages.update(images => ({
         ...images,
-        [productId]: [...variation.images] // Tạo mảng mới để trigger change detection
+        // Tạo mảng mới để trigger change detection
+        [productId]: [...variation.images] 
       }));
     }
   }
